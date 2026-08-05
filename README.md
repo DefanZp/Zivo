@@ -9,7 +9,6 @@ Designed to demonstrate modern full-stack web development using RESTful APIs, Se
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-336791?logo=postgresql&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-06B6D4?logo=tailwindcss&logoColor=white)
 ![Laravel Sanctum](https://img.shields.io/badge/Auth-Sanctum-red)
-![Angular SSR](https://img.shields.io/badge/SSR-Enabled-success)
 ![Railway](https://img.shields.io/badge/Backend-Railway-7B3FF2)
 ![Vercel](https://img.shields.io/badge/Frontend-Vercel-black)
 
