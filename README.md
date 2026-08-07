@@ -21,6 +21,28 @@ Designed to demonstrate modern full-stack web development using RESTful APIs, Se
 | 💻 Frontend Repository | https://github.com/DefanZp/Zivo-frontEnd |
 | 🔧 Backend Repository | https://github.com/DefanZp/Zivo-backEnd |
 
+
+## 🔐 Demo Account
+
+Gunakan akun berikut untuk mencoba fitur Zivo.
+
+### 👤 Customer
+
+| Field | Credential |
+|------|------------|
+| Email | `demo.user@zivo.com` |
+| Password | `ZivoUser123!` |
+
+### 🛠️ Admin
+
+| Field | Credential |
+|------|------------|
+| Email | `demo.admin@zivo.com` |
+| Password | `ZivoAdmin123!` |
+
+> Akun di atas dibuat khusus untuk keperluan demonstrasi dan tidak digunakan untuk data pribadi.
+
+
 ## 📖 About The Project
 
 Zivo is a full-stack e-commerce web application developed as a portfolio project to demonstrate modern web development practices.
