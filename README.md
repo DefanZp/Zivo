@@ -302,7 +302,6 @@ Examples include:
 | Layer | Technology |
 |--------|------------|
 | Frontend | Angular 21 |
-| Frontend Rendering | Angular SSR + Hydration |
 | Backend | Laravel 12 |
 | Language | PHP 8.2+ |
 | Database | PostgreSQL 17 |
