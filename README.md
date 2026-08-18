@@ -491,6 +491,12 @@ Authentication and admin access are protected using Angular route guards.
 
 ---
 
+### 📋 Order Detail
+
+![Order Detail](docs/images/admin/order-detail.png)
+
+---
+
 ## 📦 Source Code
 
 | Repository | Description |
