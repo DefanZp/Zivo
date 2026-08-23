@@ -152,21 +152,17 @@ Stock restoration is handled in one place to avoid restoring the same stock mult
 
 ---
 
-## 💳 Payment Flow
+# 💳 Payment Flow
 
 Zivo uses Midtrans as its payment gateway and integrates payment status with the order lifecycle.
 
 When an order is created:
 
-Order
-  ↓
-Payment
-  ↓
-unpaid
+Order → Payment → unpaid
 
 The customer can open the Midtrans Snap payment page directly from checkout or later from the order detail page using Pay Now.
 
-Payment Flow
+## Payment Flow Diagram
 
 Checkout
    ↓
@@ -186,12 +182,12 @@ Update Payment
    ↓
 Update Order
 
-Supported Payment States
+## Supported Payment States
 
 Zivo maps Midtrans transaction statuses to its own payment states:
 
 Midtrans              Zivo
-
+----------------------------
 pending         →     unpaid
 settlement      →     paid
 capture         →     paid
@@ -199,43 +195,24 @@ expire          →     expired
 cancel          →     failed
 deny            →     failed
 
-When a payment becomes paid:
+### State Transition Rules
 
-Payment
-   ↓
-paid
-   ↓
-Order
-   ↓
-processing
+When a payment becomes paid:
+Payment (paid) → Order (processing)
 
 When an unpaid payment expires:
+Payment (expired) → Order cancelled → Stock restored
 
-Payment
-   ↓
-expired
-   ↓
-Order cancelled
-   ↓
-Stock restored
+## Payment Security & Consistency
 
-Payment Security & Consistency
-
-Payment notifications are verified using Midtrans's signature.
-
-Payment notifications are processed through database transactions.
-
-Payment and order records are locked when handling sensitive status changes.
-
-Customers can only access their own payments.
-
-Completed or expired payments cannot be processed again.
-
-Existing Midtrans transactions are checked before creating a new Snap transaction to prevent duplicate payment transactions.
-
-Customers can reopen an unpaid payment from the Order Detail page using Pay Now.
-
-Payment status is controlled by the payment gateway and webhook flow, while order status follows Zivo's business rules.
+- Payment notifications are verified using Midtrans's signature.
+- Payment notifications are processed through database transactions.
+- Payment and order records are locked when handling sensitive status changes.
+- Customers can only access their own payments.
+- Completed or expired payments cannot be processed again.
+- Existing Midtrans transactions are checked before creating a new Snap transaction to prevent duplicate payment transactions.
+- Customers can reopen an unpaid payment from the Order Detail page using Pay Now.
+- Payment status is controlled by the payment gateway and webhook flow, while order status follows Zivo's business rules.
 
 ---
 
