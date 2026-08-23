@@ -164,6 +164,7 @@ The customer can open the Midtrans Snap payment page directly from checkout or l
 
 ## Payment Flow Diagram
 
+```text
 Checkout
    ↓
 Create Order
@@ -181,6 +182,7 @@ Midtrans Webhook
 Update Payment
    ↓
 Update Order
+```
 
 ## Supported Payment States
 
