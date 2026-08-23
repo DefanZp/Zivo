@@ -154,33 +154,53 @@ Stock restoration is handled in one place to avoid restoring the same stock mult
 
 ## 💳 Payment Flow
 
-The project currently has a payment flow connected to the order lifecycle.
+Zivo uses Midtrans as its payment gateway and integrates payment status with the order lifecycle.
 
 When an order is created:
 
-```text
 Order
   ↓
 Payment
   ↓
 unpaid
-```
 
-Payment status changes are validated by the backend.
+The customer can open the Midtrans Snap payment page directly from checkout or later from the order detail page using Pay Now.
 
-Current payment rules include:
+Payment Flow
 
-```text
-unpaid → paid
-unpaid → expired
+Checkout
+   ↓
+Create Order
+   ↓
+Create Payment
+   ↓
+Clear Cart
+   ↓
+Midtrans Snap
+   ↓
+Customer Payment
+   ↓
+Midtrans Webhook
+   ↓
+Update Payment
+   ↓
+Update Order
 
-paid    → cannot be changed
-expired → cannot be changed
-```
+Supported Payment States
 
-When a payment becomes `paid`:
+Zivo maps Midtrans transaction statuses to its own payment states:
 
-```text
+Midtrans              Zivo
+
+pending         →     unpaid
+settlement      →     paid
+capture         →     paid
+expire          →     expired
+cancel          →     failed
+deny            →     failed
+
+When a payment becomes paid:
+
 Payment
    ↓
 paid
@@ -188,11 +208,9 @@ paid
 Order
    ↓
 processing
-```
 
 When an unpaid payment expires:
 
-```text
 Payment
    ↓
 expired
@@ -200,9 +218,24 @@ expired
 Order cancelled
    ↓
 Stock restored
-```
 
-Payment and order updates are handled using database transactions where needed.
+Payment Security & Consistency
+
+Payment notifications are verified using Midtrans's signature.
+
+Payment notifications are processed through database transactions.
+
+Payment and order records are locked when handling sensitive status changes.
+
+Customers can only access their own payments.
+
+Completed or expired payments cannot be processed again.
+
+Existing Midtrans transactions are checked before creating a new Snap transaction to prevent duplicate payment transactions.
+
+Customers can reopen an unpaid payment from the Order Detail page using Pay Now.
+
+Payment status is controlled by the payment gateway and webhook flow, while order status follows Zivo's business rules.
 
 ---
 
@@ -531,14 +564,11 @@ The core e-commerce flow is already working. The next stage is focused on making
 
 Planned improvements:
 
-- 💳 Integrate Midtrans Snap as the online payment gateway.
 - 🔔 Handle payment gateway webhooks.
 - 📧 Add email notifications.
 - ❤️ Add wishlist functionality.
 - 🖼️ Add product image upload.
 - 📱 Improve responsive and mobile UX.
 - 🔒 Perform an additional security and production review.
-
-The Midtrans integration is currently being prepared in the Sandbox environment.
 
 ---
