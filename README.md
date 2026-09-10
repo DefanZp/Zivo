@@ -2,16 +2,21 @@
 
 A full-stack mini e-commerce application built with Laravel 12 and Angular 21 .
 
-Zivo started as a project to practice full-stack development and gradually grew into a more complete e-commerce application. The focus is not only on building the UI, but also on handling real application logic such as authentication, authorization, checkout, stock management, order processing, payment status, and data consistency.
+Zivo started as a project to practice full-stack development and gradually evolved into a more complete e-commerce system. The application focuses not only on UI development, but also on real-world backend concerns such as authentication, authorization, checkout, stock management, payment processing, data consistency, automation, and AI integration.
 
-The project uses a Service Layer architecture, PostgreSQL, Angular Signals, and is deployed using Railway and Vercel.
+The project uses a Service Layer architecture, PostgreSQL, Angular Signals, Midtrans, RajaOngkir, n8n, Docker, and Ollama.
 
 ![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)
 ![Angular](https://img.shields.io/badge/Angular-21-DD0031?logo=angular&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-336791?logo=postgresql&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-06B6D4?logo=tailwindcss&logoColor=white)
 ![Laravel Sanctum](https://img.shields.io/badge/Auth-Sanctum-red)
-![Railway](https://img.shields.io/badge/Backend-Railway-7B3FF2)
+![Vercel](https://img.shields.io/badge/Frontend-Vercel-black)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker&logoColor=white)
+![n8n](https://img.shields.io/badge/n8n-Automation-EA4B71?logo=n8n&logoColor=white)
+![Ollama](https://img.shields.io/badge/Ollama-AI-black)
+![Midtrans](https://img.shields.io/badge/Payment-Midtrans-00ADEF)
+![RajaOngkir](https://img.shields.io/badge/Shipping-RajaOngkir-orange)
 ![Vercel](https://img.shields.io/badge/Frontend-Vercel-black)
 
 ## 🚀 Live Demo
@@ -19,14 +24,15 @@ The project uses a Service Layer architecture, PostgreSQL, Angular Signals, and 
 | Service | Link |
 |---------|------|
 | 🌐 Frontend | https://zivo-front-end.vercel.app |
-| ⚙️ Backend API | https://zivo-backend-production-6c97.up.railway.app |
+| ⚙️ Backend API | https://api.zivoapp.cloud |
 | 💻 Frontend Repository | https://github.com/DefanZp/Zivo-frontEnd |
 | 🔧 Backend Repository | https://github.com/DefanZp/Zivo-backEnd |
+| 🤖 n8n Repository | https://github.com/DefanZp/Zivo-n8n |
 
 
 ## 🔐 Demo Account
 
-Gunakan akun berikut untuk mencoba fitur Zivo.
+Use the following account to try out Zivo's features.
 
 ### 👤 Customer
 
@@ -49,13 +55,31 @@ Gunakan akun berikut untuk mencoba fitur Zivo.
 
 Zivo is a full-stack e-commerce application built as a portfolio project.
 
-Customers can browse and search products, manage their cart, manage delivery addresses, place orders, and track their order history.
+Customers can browse and search products, filter products by category, manage their cart, manage delivery addresses, calculate shipping costs, place orders, complete payments, and track their order history.
 
 The application also includes an admin panel for managing products, monitoring orders, viewing sales statistics, and updating order statuses.
 
-On the backend, Laravel handles the REST API, authentication, authorization, order processing, stock management, and payment logic. The frontend is built with Angular 21 and uses Angular Signals for application state.
+Beyond the core e-commerce flow, Zivo also integrates automation and AI using n8n and Ollama. Important application events such as order creation, successful payment, and low-stock products can trigger automated workflows and email notifications.
 
-The project is designed around a Service Layer architecture so that business logic stays separated from controllers and can be easier to maintain as the application grows.
+The backend is built with Laravel 12 and handles REST APIs, authentication, authorization, order processing, stock management, payment logic, image processing, and integrations with external services.
+
+The frontend is built with Angular 21 and uses Angular Signals for application state management.
+
+The project follows a Service Layer architecture to keep business logic separated from HTTP controllers and make the application easier to maintain and extend.
+
+## ⭐ Project Highlights
+
+- Full-stack architecture using Angular and Laravel.
+- Service Layer architecture for backend business logic.
+- PostgreSQL database with transactional order processing.
+- Midtrans payment integration with webhook verification.
+- RajaOngkir shipping integration.
+- Image optimization using WebP and automatic resizing.
+- n8n-based event automation.
+- AI-assisted workflows using Ollama.
+- Dockerized production environment.
+- VPS deployment with Nginx and HTTPS.
+- GitHub Actions-based deployment workflow.
 
 ## ✨ Features
 
@@ -82,11 +106,13 @@ The project is designed around a Service Layer architecture so that business log
 - 📊 Dashboard with sales statistics.
 - 💰 Revenue summary from completed orders.
 - 📦 Product management (Create, Read, Update, Delete).
+- 🖼️ Product image upload with automatic resizing and WebP conversion.
 - 📋 View customer orders.
 - 🔎 View order details.
 - 🔄 Update order status with business rules.
 - 💳 View payment information.
 - 🔄 Update payment status.
+- 📦 Monitor low-stock products.
 - 🔐 Protected admin routes.
 
 ---
@@ -253,6 +279,102 @@ cancelled → processing
 
 ---
 
+## 🤖 AI & Automation
+
+Zivo uses n8n as an automation layer to connect the Laravel backend with AI-powered workflows and email notifications.
+
+### 1. Order Created → Admin Notification
+
+When a customer creates an order, Laravel sends an event to an n8n webhook.
+
+```text
+Laravel
+   ↓
+n8n Webhook
+   ↓
+Ollama
+   ↓
+Email to Admin
+```
+
+The workflow processes the order data and uses AI to generate the notification content.
+
+### 2. Payment Settled → Customer Notification
+
+When a payment is successfully settled, Laravel processes the Midtrans notification and triggers an n8n workflow.
+
+```text
+Midtrans
+   ↓
+Laravel
+   ↓
+n8n Webhook
+   ↓
+Ollama
+   ↓
+Email to Customer
+```
+
+The AI model is only responsible for generating the message wording, while transaction information such as order ID, payment status, and total price comes directly from Laravel.
+
+### 3. Daily Low Stock AI Summary
+
+A scheduled n8n workflow checks the Laravel API every morning for products below the low-stock threshold.
+
+```text
+Schedule Trigger
+      ↓
+Laravel Low Stock API
+      ↓
+IF
+      ↓
+Ollama
+      ↓
+Email
+```
+
+The workflow generates a short AI-assisted summary of products that require attention.
+
+### AI Model
+
+AI generation is handled using Ollama with the `qwen2.5:1.5b` model. The AI is used for wording and summarization while important business data remains controlled by the Laravel backend.
+
+---
+
+## 🖼️ Product Image Optimization
+
+Zivo uses an optimized image pipeline for product images.
+
+### Admin Upload
+
+```text
+Image Upload
+     ↓
+Validation
+     ↓
+Resize to maximum 1200px
+     ↓
+Convert to WebP
+     ↓
+Store in Product Storage
+     ↓
+Save image_path
+```
+
+The database stores only the image path, while the `image_url` attribute is generated by the Product model accessor.
+
+Example:
+
+```text
+image_path
+→ products/product_xxxxx.webp
+
+image_url
+→ https://api.zivoapp.cloud/storage/products/product_xxxxx.webp
+```
+
+Product images on the frontend use lazy loading to reduce unnecessary network requests.
+
 ## 🧱 Architecture
 
 ### Backend
@@ -307,12 +429,44 @@ Examples include:
 - Loading states
 - Selected data
 
+### Automation & Integration
+
+```text
+Laravel
+   │
+   ├── Midtrans
+   │      ↓
+   │   Payment Webhook
+   │
+   └── n8n
+          ↓
+       Ollama
+          ↓
+        Email
+```
+
+### Production Infrastructure
+
+```text
+Cloudflare
+     ↓
+    VPS
+     │
+     ├── Nginx
+     ├── Laravel
+     ├── Queue
+     ├── PostgreSQL
+     └── n8n
+```
+
+The application services are containerized using Docker and deployed on a VPS.
+
 ---
 
 ## 🛠 Tech Stack
 
 | Layer | Technology |
-|--------|------------|
+|-------|------------|
 | Frontend | Angular 21 |
 | Backend | Laravel 12 |
 | Language | PHP 8.2+ |
@@ -322,8 +476,16 @@ Examples include:
 | State Management | Angular Signals |
 | ORM | Eloquent ORM |
 | API Architecture | REST API |
+| Payment | Midtrans |
+| Shipping | RajaOngkir |
+| Image Processing | Intervention Image |
+| Automation | n8n |
+| AI | Ollama |
+| Containerization | Docker / Docker Compose |
+| Reverse Proxy | Nginx |
+| Deployment | Vercel + VPS |
+| CI/CD | GitHub Actions |
 | API Testing | Thunder Client |
-| Deployment | Vercel & Railway |
 
 ---
 
@@ -368,12 +530,31 @@ Create Payment
 
 This helps prevent inconsistent results when multiple requests happen at the same time.
 
+### Image Optimization
+
+Product images are resized and converted to WebP before being stored.
+
+This reduces image size while maintaining sufficient quality for product listings and detail pages.
+
+### Automation with n8n
+
+n8n is used as a separate automation layer instead of putting notification logic directly inside frontend components.
+
+This keeps event-driven workflows separate from the main application logic.
+
+### AI-assisted Content
+
+AI is used for generating notification wording and summaries, while critical business data remains controlled by the Laravel backend.
+
+This prevents AI-generated text from becoming the source of truth for transaction data.
+
 
 ## 🗂️ Main Frontend Routes
 
 ```text
 /
 ├── products
+├── products?category=:slug
 ├── product/:id
 ├── cart
 ├── checkout
@@ -389,7 +570,9 @@ This helps prevent inconsistent results when multiple requests happen at the sam
 ├── admin/products/create
 ├── admin/products/:id/edit
 ├── admin/orders
-└── admin/orders/:id
+├── admin/orders/:id
+│
+└── payment/result
 ```
 
 Authentication and admin access are protected using Angular route guards.
@@ -508,6 +691,26 @@ Authentication and admin access are protected using Angular route guards.
 
 ---
 
+## 🤖 Automation Workflows
+
+### 📦 Order Created
+
+![Order Created](docs/images/automation/order-created.png)
+
+---
+
+### 💳 Payment Settled
+
+![Payment Settled](docs/images/automation/payment-settled.png)
+
+---
+
+### 📉 Daily Low Stock
+
+![Daily Low Stock](docs/images/automation/low-stock.png)
+
+---
+
 ## 📦 Source Code
 
 | Repository | Description |
@@ -537,17 +740,16 @@ Follow the README in each repository for environment setup and installation inst
 
 ---
 
-## 🚧 What's Next
+## 🚧 Future Improvements
 
-The core e-commerce flow is already working. The next stage is focused on making the application more production-ready.
+The core e-commerce, payment, automation, and AI workflows are currently implemented.
 
-Planned improvements:
+Possible future improvements include:
 
-- 🔔 Handle payment gateway webhooks.
-- 📧 Add email notifications.
-- ❤️ Add wishlist functionality.
-- 🖼️ Add product image upload.
-- 📱 Improve responsive and mobile UX.
-- 🔒 Perform an additional security and production review.
+- ❤️ Wishlist functionality
+- 🧪 Increase automated test coverage
+- 📱 Further improve responsive and mobile UX
+- 📊 Add more monitoring and observability
+- ⚙️ Further improve deployment automation
 
 ---
