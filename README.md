@@ -1,1311 +1,419 @@
-# 🛒 Zivo — AI-Powered E-Commerce Platform
+# Zivo — AI-Powered E-Commerce Platform
 
-A full-stack e-commerce platform built with **Next.js, Laravel 12, PostgreSQL, and Python-based AI services**.
+Zivo is a full-stack e-commerce platform with an integrated AI Shopping Agent. It combines a customer-facing storefront, an administration interface, a Laravel REST API, an independent AI service, and event-driven automation.
 
-Zivo combines a modern e-commerce experience with an AI Shopping Agent that helps customers discover products through natural language, explore product recommendations, compare options, and interact with their shopping cart.
+The project explores practical full-stack and AI engineering: authentication and authorization, product discovery, transactional checkout, payment integration, retrieval-augmented generation (RAG), tool integration through the Model Context Protocol (MCP), streaming responses, and automated notifications.
 
-The project focuses on practical full-stack engineering, including authentication, authorization, transactional order processing, payment integration, shipping calculations, workflow automation, and AI agent orchestration.
+> **Repository purpose:** This repository is the central project overview and documentation hub. The application source code lives in the separate repositories listed below.
 
 ---
 
-## 🚀 Live Demo
+## Live Application
 
 | Service | Link |
 |---|---|
-| 🌐 Frontend | [Zivo Live](https://zivo-front-end-next-5uvw.vercel.app/) |
-| ⚙️ Backend API | [Zivo API](https://api.zivoapp.cloud) |
-| 💻 Frontend Repository | [Zivo Frontend](https://github.com/DefanZp/Zivo-frontEnd-next) |
-| 🔧 Backend Repository | [Zivo Backend](https://github.com/DefanZp/Zivo-backEnd) |
-| ⚡ Automation Repository | [Zivo n8n](https://github.com/DefanZp/Zivo-n8n) |
-| 🤖 AI Service Repository | [Zivo Ai](https://github.com/DefanZp/Zivo-ai) |
+| Customer application | [Zivo Web App](https://zivo-front-end-next-5uvw.vercel.app/) |
+| Backend API | [Zivo API](https://api.zivoapp.cloud) |
 
+## Application Preview
 
-## 🔐 Demo Accounts
+The screenshots below show the customer-facing pages and administrator interface.
 
-Use the following accounts to explore the application.
+### Customer Application
 
-### Customer
+#### Home Page
 
-| Field | Credential |
-|---|---|
-| Email | `demo.user@zivo.com` |
-| Password | `ZivoUser123!` |
+![Zivo home page](docs/images/preview/customer/home.png)
 
-### Administrator
+#### Product Catalog
 
-| Field | Credential |
-|---|---|
-| Email | `demo.admin@zivo.com` |
-| Password | `ZivoAdmin123!` |
+![Product catalog](docs/images/preview/customer/product-catalog.png)
+
+#### Product Details
+
+![Product details](docs/images/preview/customer/product-detail.png)
+
+#### Shopping Cart
+
+![Shopping cart](docs/images/preview/customer/cart.png)
+
+#### Checkout
+
+![Checkout](docs/images/preview/customer/checkout.png)
+
+#### AI Shopping Assistant
+
+![AI Shopping Assistant](docs/images/preview/customer/ai-shopping-assistant.png)
+
+#### Order History
+
+![Order history](docs/images/preview/customer/order-history.png)
+
+#### Order Details
+
+![Order details](docs/images/preview/customer/order-detail.png)
+
+#### Account Profile
+
+![Account profile](docs/images/preview/customer/profile.png)
+
+#### Address Management
+
+![Address management](docs/images/preview/customer/addresses.png)
+
+#### Login
+
+![Login page](docs/images/preview/customer/login.png)
+
+#### Registration
+
+![Registration page](docs/images/preview/customer/register.png)
+
+### Administrator Dashboard
+
+#### Dashboard Overview
+
+![Administrator dashboard](docs/images/preview/admin/dashboard.png)
+
+#### Product Management
+
+![Product management](docs/images/preview/admin/products.png)
+
+#### Create Product
+
+![Create product](docs/images/preview/admin/create-product.png)
+
+#### Edit Product
+
+![Edit product](docs/images/preview/admin/edit-product.png)
+
+#### Order Management
+
+![Order management](docs/images/preview/admin/orders.png)
+
+#### Order Details
+
+![Order details](docs/images/preview/admin/order-detail.png)
 
 ---
 
-# 📖 About the Project
+## Project Overview
 
-Zivo started as a full-stack development project and gradually evolved into a more complete e-commerce application.
+Zivo is built as four cooperating parts:
 
-The platform consists of three main parts:
+1. **E-commerce frontend** — provides the storefront, customer account pages, checkout experience, and administrator interface.
+2. **E-commerce backend** — owns the REST API, application data, authentication, authorization, and transactional business rules.
+3. **AI Shopping Agent** — helps customers discover products and store-policy information through natural-language conversation, and exposes supported shopping actions through tools.
+4. **Automation layer** — uses n8n to coordinate event-driven notifications and scheduled operational workflows.
 
-1. **E-Commerce Platform** — product discovery, shopping cart, checkout, payment, shipping, customer accounts, and administration.
-2. **AI Shopping Agent** — natural language product discovery, RAG-based retrieval, product recommendations, and tool-based shopping cart interactions.
-3. **Automation System** — event-driven workflows for order notifications, payment notifications, and low-stock monitoring.
+The services are maintained in separate repositories so that each part can be developed, configured, and deployed independently.
 
-The frontend is built with Next.js and React, while Laravel 12 handles the core e-commerce business logic and REST APIs.
+## Key Features
 
-The AI capabilities are implemented as a separate Python service using FastAPI, LangChain, LangGraph, MCP, and Google Gemini.
+### Customer Experience
 
-The application uses PostgreSQL for persistent data and follows a Service Layer architecture to keep business logic separated from HTTP controllers.
+- Customer registration, login, and email verification.
+- Product catalog with search, category filtering, sorting, and pagination.
+- Product detail pages.
+- Shopping cart management.
+- Saved delivery addresses and default address selection.
+- Checkout and order creation.
+- Midtrans Snap payment flow and payment-result pages.
+- Order history and order details.
+- AI-assisted product discovery through a chat interface.
 
----
+### Administrator Experience
 
-# ⭐ Project Highlights
-
-- Full-stack e-commerce architecture using Next.js and Laravel 12.
-- AI Shopping Assistant powered by LangGraph and Google Gemini.
-- RAG-based product discovery using Chroma and Ollama Embeddings.
-- Model Context Protocol (MCP) integration for external tools.
-- Streaming AI responses using Server-Sent Events (SSE).
-- Zustand-based authentication state management.
-- Laravel Sanctum authentication and authorization.
-- PostgreSQL with transactional order processing.
-- Midtrans payment integration with webhook verification.
-- RajaOngkir shipping integration.
-- Product image optimization using WebP and automatic resizing.
-- n8n-based event-driven automation.
-- AI-assisted email notifications and reporting.
-- Dockerized backend and AI service infrastructure.
-- VPS deployment with Nginx and HTTPS.
-- GitHub Actions-based deployment workflow.
-
----
-
-# ✨ Features
-
-## 👤 Customer Features
-
-### Authentication & Account
-
-- Register and login using Laravel Sanctum.
-- Email verification flow.
-- Protected routes for authenticated users.
-- Verified-user route protection.
-- Persistent authentication state using Zustand.
-- User profile management.
-- Manage multiple delivery addresses.
-- Set a default delivery address.
-
-### Product Discovery
-
-- Browse products.
-- Product pagination.
-- Search products by name.
-- Filter products by category.
-- Sort products by newest, price, or name.
-- View product details.
-
-### Shopping Cart & Checkout
-
-- Add products to the shopping cart.
-- Increase and decrease item quantities.
-- Remove individual cart items.
-- Clear the shopping cart.
-- Select a delivery address.
-- Create orders from cart items.
-- Validate product stock and pricing on the backend.
-
-### Orders & Payments
-
-- View order history with pagination.
-- View order details.
-- View shipping information stored with an order.
-- Track order status through an order timeline.
-- Complete payments using Midtrans Snap.
-- View payment results.
-- Reopen unpaid payments through the Pay Now flow.
-
-## 🛠 Administrator Features
-
-### Dashboard
-
-- Sales statistics.
-- Revenue summary from completed orders.
+- Sales and revenue overview.
 - Low-stock product monitoring.
+- Product creation, editing, deletion, and image upload.
+- Order listing, order details, and business-rule-based order status management.
 
-### Product Management
+### AI Shopping Assistant
 
-- View products.
-- Create products.
-- Edit product information.
-- Delete products.
-- Upload product images.
-- Automatic image resizing and WebP conversion.
+- Natural-language product discovery.
+- Semantic retrieval of product candidates using a product knowledge collection.
+- Store-policy retrieval from a separate knowledge collection.
+- Verification of current product information through the Laravel API.
+- Streaming chat responses using Server-Sent Events (SSE).
+- Tool-based cart operations for authenticated users, subject to backend authorization.
 
-### Order Management
+RAG retrieval is used to find relevant candidates and reference information. Laravel remains the source of truth for current product details, prices, stock, cart contents, orders, and other transactional data.
 
-- View customer orders.
-- View order details.
-- View payment information.
-- Update order status according to business rules.
-- Update payment status through the appropriate backend workflow.
-- Monitor order processing.
+### Automation
 
-### Access Control
+The project documents three n8n workflow use cases:
 
-- Protected administrator routes.
-- Admin-specific route guard.
-- Backend authorization for administrative operations.
+- **Order created:** notify the administrator after an order is created.
+- **Payment settled:** notify the customer after payment settlement.
+- **Daily low-stock summary:** periodically retrieve low-stock products and prepare a summary for the administrator.
+
+The workflow screenshots currently stored in this repository are visual references. The n8n repository snapshot contains deployment configuration but does not include workflow JSON exports, so node-level implementation and active workflow status should be verified in the n8n instance.
+
+#### Workflow Snapshots
+
+**Order Created → Admin Notification**
+
+![Order created automation](docs/images/automation/order-created.png)
+
+**Payment Settled → Customer Notification**
+
+![Payment settled automation](docs/images/automation/payment-settled.png)
+
+**Daily Low Stock AI Summary**
+
+![Daily low-stock automation](docs/images/automation/low-stock.png)
+
+These images document workflow canvases; they do not independently confirm that each workflow is currently active or successfully executing in production.
 
 ---
 
-# 🤖 AI Shopping Assistant
+## System Architecture
 
-Zivo includes an AI Shopping Assistant that allows customers to interact with the product catalog using natural language.
+The diagrams below use plain-text flowcharts. They are written directly in this README, so the architecture does not depend on screenshots or external diagram files.
 
-Instead of relying only on conventional keyword searches, customers can describe what they need and receive product suggestions based on their requirements.
-
-## AI Features
-
-### 1. Natural Language Product Discovery
-
-Customers can describe product requirements in ordinary language.
-
-Example:
+### 1. Main E-Commerce Flow
 
 ```text
-Find a breathable shirt for warm weather.
+                 CUSTOMER / ADMIN
+                        |
+                        v
+                 NEXT.JS FRONTEND
+               Storefront / Admin UI
+                        |
+                 REST API requests
+                        |
+                        v
+                  LARAVEL BACKEND
+          Authentication, Catalog, Cart,
+               Orders, and Payments
+                        |
+                 Read / write data
+                        |
+                        v
+                    POSTGRESQL
+
+
+LARAVEL BACKEND
+      |
+      +---- Authenticates users and checks permissions
+      |
+      +---- Applies e-commerce business rules
+      |
+      +---- Reads and updates application data
 ```
 
-The agent can identify relevant requirements such as material, intended use, and product characteristics.
+Laravel is the source of truth for identity, permissions, product data, prices, stock, cart contents, orders, and payment state. Frontend route guards control navigation but do not replace backend authorization.
 
-### 2. RAG-Based Product Retrieval
+### 2. AI Shopping Assistant Flow
 
-Zivo uses Retrieval-Augmented Generation (RAG) to retrieve relevant product candidates from its product knowledge base.
+```text
+CUSTOMER
+   |
+   v
+NEXT.JS CHAT WIDGET
+   |
+   v
+NEXT.JS ROUTE HANDLER
+   /api/chat/stream
+   |
+   | HTTP streaming request
+   v
+FASTAPI AI SERVICE
+   |
+   v
+LANGGRAPH AGENT <--------------------> POSTGRESQL CHECKPOINTER
+   |
+   +-------------------+---------------------+
+   |                   |                     |
+   v                   v                     v
+GEMINI MODEL       RAG RETRIEVAL          MCP TOOLS
+                   |                     |
+                   v                     +---- Product operations
+             CHROMA COLLECTIONS          +---- Cart operations
+             |                           |
+             +-- Product catalog         | Live API requests
+             +-- Store policies          v
+                                    LARAVEL BACKEND
+                                           |
+                                           v
+                                      POSTGRESQL
 
-The retrieval workflow:
 
-1. Product information is retrieved from the Laravel API.
-2. Each product is converted into a document.
-3. Ollama Embeddings generates vector representations.
-4. Product vectors are stored in Chroma.
-5. The agent performs similarity search based on the user's request.
-6. Retrieved candidates are evaluated before further product lookups.
+STREAMING RESPONSE (SSE)
+FASTAPI  --->  NEXT.JS ROUTE HANDLER  --->  CHAT WIDGET
+```
 
-The current product retrieval implementation uses a similarity search with a maximum of three candidates.
+The agent uses Gemini for language reasoning, RAG to retrieve relevant product candidates or store-policy information, and MCP tools for supported live operations. Product and cart actions that need current application data go through Laravel. The response is streamed back to the browser using SSE events.
 
-### 3. Product Details Verification
+### 3. Payment and Automation Flow
 
-RAG is used to discover relevant candidates, not as the source of truth for live transactional information.
+```text
+CUSTOMER CHECKOUT
+       |
+       v
+LARAVEL BACKEND
+       |
+       | Creates payment request
+       v
+MIDTRANS SNAP
+       |
+       | Payment notification
+       v
+LARAVEL PAYMENT CALLBACK
+       |
+       +---- Verify notification signature
+       |
+       +---- Update payment / order state
+       |
+       +---- Commit database transaction
+                    |
+                    | After-commit webhook
+                    v
+                   N8N
+                    |
+                    v
+          EMAIL / ADMIN / CUSTOMER
+               NOTIFICATIONS
 
-The agent retrieves current product details through Laravel API tools before presenting information such as:
 
-- Product price.
-- Product stock.
-- Product details.
+SCHEDULED N8N WORKFLOW
+       |
+       | Scheduled API request
+       v
+LARAVEL BACKEND
+       |
+       v
+LOW-STOCK DATA / SUMMARY
+       |
+       v
+ADMIN NOTIFICATION
+```
 
-This separation helps prevent outdated vector-store information from being treated as current transactional data.
+This flow represents the integration use cases described by the project documentation. The n8n repository snapshot contains deployment configuration but no workflow JSON exports, so the exact nodes and current activation status still need to be checked in the n8n instance.
 
-### 4. Product Comparison & Recommendations
+### Service Responsibilities
 
-The agent can evaluate product candidates based on customer requirements, including:
+| Service | Main responsibility | Main technologies |
+|---|---|---|
+| Frontend | Storefront, account pages, admin UI, and chat interface | Next.js, React, TypeScript, Tailwind CSS, Zustand |
+| Backend | REST API, identity, authorization, catalog, cart, checkout, orders, and payments | Laravel, PHP, PostgreSQL, Sanctum |
+| AI service | Agent orchestration, retrieval, tool execution, and chat streaming | Python, FastAPI, LangChain, LangGraph, Gemini, MCP, Chroma |
+| Automation | Event-driven and scheduled workflows | n8n, Docker, GitHub Actions |
 
-- Material.
-- Breathability.
-- Intended use.
-- Care instructions.
-- Product characteristics.
-- Price and availability.
+**Database note:** the Laravel application database and LangGraph checkpointer use separate configuration variables. The supplied source snapshots do not establish whether production uses the same PostgreSQL instance or separate instances.
 
-Recommendations are based on the retrieved product information and verified product details.
+## Technical Highlights
 
-### 5. AI Shopping Cart Operations
+### Transactional Checkout
 
-The agent can interact with shopping cart functionality through MCP tools.
+The backend processes order creation inside a database transaction. It verifies address ownership, locks selected product rows, checks stock, calculates totals using current product data, creates the order and order items, decreases stock, and creates the related payment record.
 
-Supported operations include:
+### Payment Integration
 
-- Retrieve the current cart.
-- Add a product to the cart.
-- Increase item quantity.
-- Decrease item quantity.
-- Remove cart items.
-- Clear the cart.
+Midtrans Snap is used to initiate payments. Payment notifications are verified by the backend using a SHA-512 signature check, and sensitive payment updates are handled through database transactions and row locking.
 
-Cart operations require authentication and are subject to Laravel backend authorization.
+### AI Retrieval and Tool Integration
 
-Guest users can still use public product discovery features without logging in.
+The AI service uses Chroma to retrieve product candidates and store-policy information. MCP tools connect the agent to supported backend operations. Current transactional information is retrieved from Laravel rather than trusted from generated text or potentially stale vector data.
 
-### 6. Streaming Responses
+### Streaming Chat
 
-The chatbot supports streamed responses using Server-Sent Events (SSE).
+The browser sends chat messages through a Next.js Route Handler, which proxies the request to FastAPI. The AI service streams `token`, `done`, and `error` events using SSE.
 
-Instead of waiting for the complete response before displaying it, the frontend receives and renders text chunks as they arrive.
+### Authentication and Authorization
 
-This provides a more interactive chatbot experience.
+The frontend uses Zustand to manage its client-side authentication state. Laravel Sanctum authenticates protected API requests, while backend middleware enforces customer and administrator access. Frontend route guards are navigation controls and do not replace backend authorization.
 
 ---
-
-# 🧠 AI Architecture
-
-The AI Shopping Assistant runs as a separate service from the main e-commerce backend.
 
 ## Technology Stack
 
-| Component | Technology |
+| Area | Technology |
 |---|---|
-| AI Service | Python, FastAPI |
-| Agent Framework | LangChain, LangGraph |
-| LLM Provider | Google Gemini |
-| Tool Integration | Model Context Protocol (MCP) |
-| Vector Database | Chroma |
-| Embedding Model | Ollama Embeddings |
-| E-Commerce Integration | Laravel REST API |
-| Agent Checkpointing | LangGraph + PostgreSQL |
-
-## AI Request Flow
-
-```text
-Next.js Chat Widget
-        |
-        v
-Next.js Route Handler
-        |
-        v
-FastAPI AI Service
-        |
-        v
-LangGraph Agent
-        |
-        v
-MCP Client
-        |
-        v
-MCP Server
-     /      \
-    v        v
- Chroma   Laravel API
-    |        |
-    +----+---+
-         |
-         v
-    Tool Results
-         |
-         v
-    LangGraph Agent
-         |
-         v
-  Streaming Response
-         |
-         v
-  Next.js Chat Widget
-```
-
-## Agent Architecture
-
-The AI agent uses a combination of:
-
-- **RAG Agent:** retrieves relevant product and store-policy information.
-- **ReAct-style tool execution:** allows the agent to reason about actions, invoke tools, and evaluate tool results.
-- **Agent State:** maintains information required during a conversation.
-- **Agent Context:** provides runtime information needed by tools.
-- **Checkpointing:** persists conversation state using PostgreSQL.
-
-## MCP Integration
-
-The MCP Server exposes tools for product discovery, product information, knowledge retrieval, and shopping cart operations.
-
-### MCP Tools
-
-| Tool | Purpose |
-|---|---|
-| `search_products` | Search products through Laravel API |
-| `get_product` | Retrieve current product details |
-| `search_product_knowledge` | Search product knowledge in Chroma |
-| `search_policy_knowledge` | Retrieve store policy information |
-| `get_cart` | Retrieve the customer's cart |
-| `add_to_cart` | Add an item to the cart |
-| `increase_quantity` | Increase cart item quantity |
-| `decrease_quantity` | Decrease cart item quantity |
-| `remove_from_cart` | Remove an item from the cart |
-| `clear_cart` | Remove all cart items |
-
-The agent also maintains local state-management tools for selecting and clearing the current product.
-
-### MCP Communication
-
-The current local development architecture uses:
-
-- MCP Host: FastAPI and LangGraph AI service.
-- MCP Client: `MCPAdapter`.
-- MCP Server: `mcp_server.py`.
-- Transport: STDIO.
-
-At startup, the application connects to the MCP Server, discovers the available tools, and provides them to the agent.
-
-## AI Authentication Flow
-
-For authenticated shopping cart operations:
-
-1. Next.js obtains the current authentication token from the auth store.
-2. The token is forwarded through the chat request.
-3. FastAPI verifies the user through the Laravel API.
-4. The authenticated token is provided to the agent runtime context.
-5. Tool wrappers pass the required authentication context to MCP tools.
-6. Laravel validates authentication and ownership before performing cart operations.
-
-The AI service does not treat model-generated information as proof of authorization. Laravel remains responsible for validating access to protected business operations.
-
-## RAG Knowledge Collections
-
-The AI service uses Chroma collections for different knowledge domains:
-
-| Collection | Purpose |
-|---|---|
-| `zivo_product_catalog` | Product attribute retrieval |
-| `zivo_returns_policy` | Store return-policy retrieval |
-
-Product knowledge retrieval is used for candidate discovery, while Laravel provides the current product details.
-
-The product catalog vector store currently requires re-ingestion when catalog information changes.
-
----
-
-# 🔄 Automation Workflows
-
-Zivo uses n8n as a separate automation layer to connect Laravel events with AI-assisted notifications.
-
-## 1. Order Created → Admin Notification
-
-When a customer creates an order, Laravel sends an event to an n8n webhook.
-
-```text
-Laravel
-   |
-   v
-n8n Webhook
-   |
-   v
-Ollama
-   |
-   v
-Email to Admin
-```
-
-The AI model generates the notification wording, while order information comes from Laravel.
-
-## 2. Payment Settled → Customer Notification
-
-When a payment is successfully settled, Laravel processes the Midtrans notification and triggers an n8n workflow.
-
-```text
-Midtrans
-   |
-   v
-Laravel
-   |
-   v
-n8n Webhook
-   |
-   v
-Ollama
-   |
-   v
-Email to Customer
-```
-
-The AI model is responsible for generating message wording. Critical transaction information remains controlled by the backend.
-
-## 3. Daily Low Stock AI Summary
-
-A scheduled n8n workflow checks the Laravel API every morning for products below the configured low-stock threshold.
-
-```text
-Schedule Trigger
-       |
-       v
-Laravel Low Stock API
-       |
-       v
-Condition Check
-       |
-       v
-Ollama
-       |
-       v
-Email Summary
-```
-
-The workflow generates an AI-assisted summary of products that require attention.
-
-## Automation AI Model
-
-The existing n8n notification workflows use Ollama with the `qwen2.5:1.5b` model.
-
----
-
-# 📦 Order & Checkout
-
-Checkout is handled by Laravel to ensure that important business rules are enforced on the backend rather than trusted to the frontend.
-
-When an order is created, the backend:
-
-1. Validates that the selected delivery address belongs to the authenticated user.
-2. Locks the related products before checking stock.
-3. Checks product availability.
-4. Calculates the order total using the current product price.
-5. Creates the order and order items.
-6. Reduces product stock.
-7. Creates the related payment record.
-8. Commits the operation inside a database transaction.
-
-This helps maintain data consistency when an error occurs during order creation.
-
-## Address Snapshot
-
-Zivo uses an address snapshot when an order is created.
-
-```text
-Customer Address
-       |
-       v
-    Checkout
-       |
-       v
-Order Address Snapshot
-```
-
-The shipping information is copied into the order at checkout.
-
-Changing a customer's address later does not change the shipping information stored in an existing order.
-
-## Stock Management
-
-Stock is handled as part of the order business logic.
-
-```text
-Current Stock
-     -
-Order Quantity
-     =
-New Stock
-```
-
-Products are locked using `lockForUpdate()` while the order is being processed.
-
-This helps prevent inconsistent stock when multiple requests attempt to purchase the same product concurrently.
-
-When an order is cancelled, stock is restored through the cancellation flow.
-
-Stock restoration is handled in one place to avoid restoring the same stock multiple times.
-
----
-
-# 💳 Payment Integration
-
-Zivo uses Midtrans as its payment gateway and integrates payment status with the order lifecycle.
-
-## Payment Flow
-
-```text
-Checkout
-   |
-   v
-Create Order
-   |
-   v
-Create Payment
-   |
-   v
-Clear Cart
-   |
-   v
-Midtrans Snap
-   |
-   v
-Customer Payment
-   |
-   v
-Midtrans Webhook
-   |
-   v
-Update Payment
-   |
-   v
-Update Order
-```
-
-Customers can open the Midtrans Snap payment page directly from checkout or later from the order detail page using Pay Now.
-
-## Supported Payment States
-
-Zivo maps Midtrans transaction statuses to its own payment states:
-
-| Midtrans Status | Zivo Payment State |
-|---|---|
-| `pending` | `unpaid` |
-| `settlement` | `paid` |
-| `capture` | `paid` |
-| `expire` | `expired` |
-| `cancel` | `failed` |
-| `deny` | `failed` |
-
-## State Transition Rules
-
-When a payment becomes paid:
-
-```text
-Payment (paid) → Order (processing)
-```
-
-When an unpaid payment expires:
-
-```text
-Payment (expired)
-       |
-       v
-Order (cancelled)
-       |
-       v
-Stock Restored
-```
-
-## Payment Security & Consistency
-
-- Payment notifications are verified using Midtrans signatures.
-- Payment notifications are processed through database transactions.
-- Payment and order records are locked when handling sensitive status changes.
-- Customers can only access their own payments.
-- Completed or expired payments cannot be processed again.
-- Existing Midtrans transactions are checked before creating a new Snap transaction to prevent duplicate payment transactions.
-- Customers can reopen an unpaid payment from the Order Detail page using Pay Now.
-- Payment status is controlled by the payment gateway and webhook flow, while order status follows Zivo's business rules.
-
----
-
-# 📍 Shipping Integration
-
-Zivo integrates RajaOngkir for shipping cost calculations.
-
-Customers can:
-
-- Manage delivery addresses.
-- Select a delivery address during checkout.
-- Calculate shipping costs.
-- View shipping information associated with their orders.
-
-Shipping information is stored as part of the order snapshot to preserve the original delivery details.
-
----
-
-# 🔄 Order Status Rules
-
-Order status is controlled by business rules instead of allowing arbitrary status changes.
-
-Current transitions:
-
-```text
-pending
-  |
-  +----> processing
-  |
-  +----> cancelled
-
-processing
-  |
-  +----> completed
-  |
-  +----> cancelled
-
-completed
-  |
-  +----> cannot be changed
-
-cancelled
-  |
-  +----> cannot be changed
-```
-
-`pending → processing` is only allowed when the related payment has been successfully paid.
-
-This prevents invalid transitions such as:
-
-```text
-pending → completed
-processing → pending
-completed → cancelled
-cancelled → processing
-```
-
----
-
-# 🖼️ Product Image Optimization
-
-Zivo uses an optimized image pipeline for product images.
-
-## Admin Upload
-
-```text
-Image Upload
-     |
-     v
-Validation
-     |
-     v
-Resize to maximum 1200px
-     |
-     v
-Convert to WebP
-     |
-     v
-Store in Product Storage
-     |
-     v
-Save image_path
-```
-
-The database stores only the image path, while the `image_url` attribute is generated by the Product model accessor.
-
-Example:
-
-```text
-image_path
-    |
-    v
-products/product_xxxxx.webp
-
-image_url
-    |
-    v
-https://api.zivoapp.cloud/storage/products/product_xxxxx.webp
-```
-
-Product images on the frontend use lazy loading to reduce unnecessary network requests.
-
----
-
-# 🧱 Architecture
-
-## Frontend Architecture
-
-The Next.js application uses the App Router and separates route definitions, feature-specific components, shared UI, services, and application state.
-
-```text
-Next.js App Router
-        |
-        v
-Feature Components
-        |
-        v
-Service Layer
-        |
-        v
-API Client / Fetch
-        |
-        v
-Laravel REST API
-```
-
-### Main Frontend Layers
-
-| Layer | Responsibility |
-|---|---|
-| `app/` | App Router pages, layouts, and API route handlers |
-| `components/` | Shared components and reusable UI |
-| `features/` | Feature-specific UI and business interactions |
-| `lib/services/` | API communication and service logic |
-| `lib/stores/` | Application state management |
-| `types/` | TypeScript data types and interfaces |
-
-### State Management
-
-Zivo uses Zustand for authentication state management.
-
-The auth store uses Zustand's `persist` middleware to persist selected authentication information.
-
-The frontend also includes:
-
-- AuthGuard.
-- AdminGuard.
-- VerifiedGuard.
-
-These guards control frontend navigation and visibility. They complement, but do not replace, backend authentication and authorization.
-
-## Backend Architecture
-
-The Laravel backend follows a Service Layer structure:
-
-```text
-Route
-  |
-  v
-Controller
-  |
-  v
-Service
-  |
-  v
-Model
-  |
-  v
-Database
-```
-
-Controllers handle HTTP requests and responses, while business logic is placed inside services.
-
-Examples:
-
-- `OrderService`
-- `PaymentService`
-- `ProductService`
-
-This separation helps keep controllers focused and makes business logic easier to maintain and test.
-
-## AI Service Architecture
-
-The AI service uses FastAPI for HTTP endpoints and LangGraph for agent execution.
-
-```text
-FastAPI
-   |
-   v
-ZivoAgentService
-   |
-   v
-LangGraph Agent
-   |
-   v
-MCP Client
-   |
-   v
-MCP Server
-   |
-   +------ Laravel API
-   |
-   +------ Chroma
-```
-
-The AI service also provides streaming and non-streaming chat endpoints.
-
-The Next.js application exposes corresponding route handlers that proxy requests to the AI service.
-
-## Authentication Architecture
-
-```text
-Next.js Application
-        |
-        v
-Zustand Auth Store
-        |
-        v
-Laravel Sanctum
-        |
-        v
-Backend Authentication
-        |
-        v
-User / Admin Authorization
-```
-
-Laravel remains the source of truth for user identity and protected operations.
-
-## Automation & Integration
-
-```text
-Laravel
-   |
-   +---- Midtrans
-   |        |
-   |        v
-   |    Payment Webhook
-   |
-   +---- n8n
-            |
-            v
-          Ollama
-            |
-            v
-           Email
-```
-
-## Production Infrastructure
-
-The existing production infrastructure uses Docker and a VPS-based deployment for backend services.
-
-```text
-Cloudflare
-    |
-    v
-VPS
-    |
-    +---- Nginx
-    |
-    +---- Laravel
-    |
-    +---- Queue
-    |
-    +---- PostgreSQL
-    |
-    +---- n8n
-```
-
-The frontend is deployed separately through Vercel.
-
-
----
-
-# 🗂️ Main Frontend Routes
-
-The frontend uses Next.js App Router with route groups for customer-facing and administrator pages.
-
-## Public & Customer Routes
-
-| Route | Description |
-|---|---|
-| `/` | Homepage |
-| `/products` | Product listing |
-| `/product/[id]` | Product detail |
-| `/cart` | Shopping cart |
-| `/checkout` | Checkout |
-| `/payment/result` | Payment result |
-| `/user/settings` | User profile settings |
-| `/user/settings/addresses` | Address management |
-| `/user/orders` | Order history |
-| `/user/orders/[id]` | Order detail |
-
-## Authentication Routes
-
-| Route | Description |
-|---|---|
-| `/auth/login` | User login |
-| `/auth/register` | User registration |
-| `/auth/verify-email` | Email verification |
-| `/auth/email-verified` | Email verification result |
-
-## Administrator Routes
-
-| Route | Description |
-|---|---|
-| `/admin/dashboard` | Administrator dashboard |
-| `/admin/products` | Product management |
-| `/admin/products/create` | Create product |
-| `/admin/products/[id]/edit` | Edit product |
-| `/admin/orders` | Order management |
-| `/admin/orders/[id]` | Order details |
-
-## Chat API Routes
-
-| Endpoint | Method | Description |
-|---|---|---|
-| `/api/chat` | POST | Non-streaming AI chat |
-| `/api/chat/stream` | POST | Streaming AI chat using SSE |
-
-The chat endpoints are Next.js Route Handlers that forward requests to the FastAPI AI service. They are not separate frontend pages.
-
----
-
-# 🧩 Frontend Project Structure
-
-The following is a simplified view of the Next.js frontend structure.
-
-```text
-Zivo-frontEnd-next/
-├── app/
-│   ├── (admin)/
-│   │   └── admin/
-│   │       ├── dashboard/
-│   │       ├── orders/
-│   │       └── products/
-│   ├── (shop)/
-│   │   ├── cart/
-│   │   ├── checkout/
-│   │   ├── payment/
-│   │   ├── product/
-│   │   ├── products/
-│   │   └── user/
-│   ├── api/
-│   │   └── chat/
-│   │       ├── route.ts
-│   │       └── stream/
-│   │           └── route.ts
-│   └── auth/
-│       ├── email-verified/
-│       ├── login/
-│       ├── register/
-│       └── verify-email/
-├── components/
-│   ├── admin/
-│   ├── auth/
-│   ├── chatbot/
-│   ├── shared/
-│   └── ui/
-├── features/
-│   ├── admin/
-│   ├── auth/
-│   ├── cart/
-│   ├── checkout/
-│   ├── home/
-│   ├── orders/
-│   ├── payment/
-│   ├── products/
-│   └── user-settings/
-├── lib/
-│   ├── api/
-│   ├── services/
-│   └── stores/
-└── types/
-```
-
-This structure separates application routing, feature components, reusable UI, API services, and shared types.
-
----
-
-# 🛠 Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Frontend Framework | Next.js |
-| UI Library | React |
-| Frontend Language | TypeScript |
-| Styling | Tailwind CSS |
-| State Management | Zustand |
-| Routing | Next.js App Router |
-| Backend Framework | Laravel 12 |
-| Backend Language | PHP 8.2+ |
-| Database | PostgreSQL 17 |
-| ORM | Eloquent ORM |
-| Authentication | Laravel Sanctum |
-| API Architecture | REST API |
-| AI Service | Python, FastAPI |
-| Agent Framework | LangChain, LangGraph |
-| AI Protocol | Model Context Protocol (MCP) |
-| LLM | Google Gemini |
-| Vector Database | Chroma |
-| Embeddings | Ollama |
-| Automation | n8n |
-| Notification AI | Ollama |
-| Payment Gateway | Midtrans |
-| Shipping Integration | RajaOngkir |
-| Image Processing | Intervention Image |
+| Frontend framework | Next.js 16.4.0 |
+| UI library | React 19.3.0 |
+| Frontend language | TypeScript 5.9.3 |
+| Styling | Tailwind CSS 4.3.3 |
+| Client state | Zustand 5.0.15 |
+| Backend framework | Laravel 12.62.0 |
+| Backend language | PHP `^8.2` (Docker image uses PHP 8.3) |
+| Database | PostgreSQL 16 in the supplied backend Docker configuration |
+| API authentication | Laravel Sanctum 4.3.2 |
+| Payment | Midtrans PHP SDK 2.6.2 |
+| Image processing | Intervention Image 3.11.8 |
+| Shipping / region integration | RajaOngkir (region lookup in the reviewed backend service) |
+| AI API | Python, FastAPI |
+| Agent orchestration | LangChain `create_agent`, LangGraph |
+| LLM | Google Gemini (`gemini-3.1-flash-lite` default in the supplied AI snapshot) |
+| Tool integration | Model Context Protocol (MCP) |
+| Vector store | Chroma |
+| Embeddings | Ollama Embeddings |
+| Automation | n8n 2.35.7 in the supplied Compose configuration |
 | Containerization | Docker / Docker Compose |
-| Reverse Proxy | Nginx |
-| Frontend Deployment | Vercel |
-| Backend Infrastructure | VPS |
+| Reverse proxy | Nginx |
+| Frontend deployment | Vercel (as described by the project configuration) |
 | CI/CD | GitHub Actions |
 
+Versions above come from the supplied repository snapshots and lock/configuration files. They should be checked against the current deployed repositories before being treated as the latest production versions.
 
----
+## Repository Guide
 
-# 🧠 Technical Decisions
+Zivo is maintained across four application repositories:
 
-## Service Layer
-
-Business logic is separated from controllers using the Service Layer pattern.
-
-This is especially useful for:
-
-- Checkout.
-- Order creation.
-- Stock management.
-- Payment processing.
-- Order cancellation.
-- Product management.
-
-## PostgreSQL
-
-PostgreSQL is used as the main relational database.
-
-It stores structured application data such as:
-
-- Users.
-- Products.
-- Categories.
-- Carts.
-- Orders.
-- Order items.
-- Payments.
-- Addresses.
-
-## Database Transactions
-
-Transactions are used when multiple database changes need to succeed or fail together.
-
-For example:
-
-```text
-Create Order
-     +
-Create Order Items
-     +
-Reduce Stock
-     +
-Create Payment
-```
-
-Using a database transaction helps keep related operations consistent.
-
-## Concurrency Handling
-
-`lockForUpdate()` is used when processing products and updating sensitive order and payment data.
-
-This helps prevent inconsistent results when multiple requests happen concurrently.
-
-## AI Source of Truth
-
-The AI Shopping Agent uses RAG to retrieve relevant product candidates.
-
-However, live business information such as product prices, stock, and cart state comes from the Laravel backend.
-
-This keeps transactional information separate from generated model responses.
-
-## MCP Integration
-
-MCP provides a standard communication protocol between the AI application and external tools.
-
-The agent runtime manages its state and context, while the MCP Server exposes specific capabilities.
-
-This separation helps keep tool implementations independent from the agent's internal orchestration logic.
-
-## Automation with n8n
-
-n8n is used as a separate automation layer instead of putting notification logic directly inside frontend components.
-
-This keeps event-driven workflows separate from the main application logic.
-
-## Authentication State Management
-
-Zustand manages frontend authentication state and persistence.
-
-Laravel Sanctum remains responsible for validating authenticated API requests.
-
-Frontend route guards are used for navigation and user experience, not as the only security mechanism.
-
----
-
-# 🔒 Security Considerations
-
-Zivo implements several security-related mechanisms across its application layers.
-
-## Authentication & Authorization
-
-- Laravel Sanctum protects authenticated API endpoints.
-- Administrator operations require appropriate backend authorization.
-- Customers can access only their own protected resources.
-- Frontend guards control access to protected pages.
-- Verified-user routes are protected separately.
-
-## Payment Security
-
-- Midtrans webhook signatures are verified.
-- Payment state changes are handled through backend business rules.
-- Database transactions and row locking are used for sensitive operations.
-- Duplicate payment processing is prevented through transaction checks.
-
-## AI Tool Security
-
-- Cart operations require authenticated access.
-- Laravel validates user access and cart ownership.
-- Tool arguments must be validated before execution.
-- Authentication credentials should remain outside model-generated content.
-- Retrieved documents are treated as external data, not trusted developer instructions.
-
-## Data Privacy
-
-- API keys and credentials must be stored in environment variables.
-- Authorization headers and bearer tokens should not be written to application logs.
-- User-specific information must be protected by appropriate access controls.
-- AI context should include only the information required for the task.
-
-These mechanisms should be complemented with regular integration tests, security testing, and monitoring.
-
----
-
-# ⚙️ Installation & Local Development
-
-Zivo consists of separate services. The frontend requires the Laravel backend to be available, while AI chat functionality additionally requires the FastAPI AI service.
-
-## Prerequisites
-
-- Node.js and npm.
-- PHP 8.2 or later.
-- Composer.
-- PostgreSQL.
-- Python.
-- Docker / Docker Compose (for the services that use it).
-- Ollama (for local embedding and automation workflows, where required).
-
-## 1. Clone the Frontend Repository
-
-```bash
-git clone https://github.com/DefanZp/Zivo-frontEnd-next
-cd Zivo-frontEnd-next
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-## 2. Configure Frontend Environment Variables
-
-Create `.env.local` in the frontend root directory.
-
-```env
-# Laravel API base URL
-NEXT_PUBLIC_API_URL=<YOUR_LARAVEL_API_BASE_URL>
-
-# FastAPI AI service URL
-AI_SERVICE_URL=<YOUR_FASTAPI_AI_SERVICE_URL>
-```
-
-`AI_SERVICE_URL` is used by the Next.js chat Route Handlers.
-
-Make sure the Laravel API environment variable matches the actual variable name used in `lib/api/client.ts`.
-
-Do not commit `.env.local` or real API credentials to GitHub.
-
-## 3. Run the Frontend
-
-Start the Next.js development server:
-
-```bash
-npm run dev
-```
-
-Open:
-
-```text
-http://localhost:3000
-```
-
-For production builds:
-
-```bash
-npm run build
-npm run start
-```
-
-For available development, build, and other npm scripts, see the [`package.json`](https://github.com/DefanZp/Zivo-frontEnd-next/blob/master/package.json) in the frontend repository.
-
-## 4. Set Up the Laravel Backend
-
-Clone the backend repository:
-
-```bash
-git clone https://github.com/DefanZp/Zivo-backEnd
-cd Zivo-backEnd
-```
-
-Install PHP dependencies:
-
-```bash
-composer install
-```
-
-Prepare the environment file:
-
-```bash
-cp .env.example .env
-```
-
-Generate the application key:
-
-```bash
-php artisan key:generate
-```
-
-Configure PostgreSQL, Sanctum, Midtrans, RajaOngkir, storage, and other required environment variables according to the backend README.
-
-Run migrations:
-
-```bash
-php artisan migrate
-```
-
-Create the storage symlink when required:
-
-```bash
-php artisan storage:link
-```
-
-Run the backend development server:
-
-```bash
-php artisan serve
-```
-
-For detailed instructions on database seeding and additional service configuration, please refer to the [Backend Repository README](https://github.com/DefanZp/Zivo-backEnd#readme).
-
-## 5. Set Up the AI Service
-
-The AI Shopping Assistant runs as a separate Python service.
-
-Follow the AI service repository README for its Python environment, dependency installation, and configuration.
-
-The current architecture requires configuration for:
-
-- `GEMINI_API_KEY`
-- `GEMINI_MODEL`
-- `BACKEND_URL`
-- `LANGGRAPH_DB_URI`
-- Ollama configuration for local embeddings.
-
-The MCP Server is currently started by the FastAPI AI service through the local STDIO transport.
-
-For AI chat functionality, ensure the FastAPI service and its dependencies are running and that `AI_SERVICE_URL` points to the correct service address.
-
-## 6. External Services
-
-Depending on the functionality being tested, configure the required external services:
-
-| Service | Purpose |
+| Repository | Description |
 |---|---|
-| Midtrans | Payment processing |
-| RajaOngkir | Shipping cost calculation |
-| n8n | Automated workflows |
-| Ollama | Local embeddings and notification generation |
-| Google Gemini | AI Shopping Agent |
-| Chroma | Product and policy retrieval |
+| [Zivo Frontend](https://github.com/DefanZp/Zivo-frontEnd-next) | Next.js storefront, customer pages, administrator interface, and chat widget. |
+| [Zivo Backend](https://github.com/DefanZp/Zivo-backEnd) | Laravel REST API and core e-commerce business logic. |
+| [Zivo AI Service](https://github.com/DefanZp/Zivo-ai) | FastAPI service, LangGraph agent, RAG, MCP integration, and streaming. |
+| [Zivo n8n](https://github.com/DefanZp/Zivo-n8n) | n8n Docker deployment and GitHub Actions deployment workflow. |
 
-Some functionality will remain unavailable until its external services are configured.
+## Getting Started
 
----
+This repository is an overview and documentation hub; it does not contain the application source code.
 
-# 📂 Source Code Repositories
+To run Zivo locally:
 
-| Repository | Responsibility |
-|---|---|
-| Next.js Frontend (https://github.com/DefanZp/Zivo-frontEnd-next) | Customer interface, administrator interface, and chat widget |
-| [Laravel Backend](https://github.com/DefanZp/Zivo-backEnd) | E-commerce API and business logic |
-| [n8n Automation](https://github.com/DefanZp/Zivo-n8n) | Event-driven automation workflows |
-| AI Service (https://github.com/DefanZp/Zivo-ai) | FastAPI, LangGraph agent, MCP integration, and RAG |
+1. Clone the repositories you want to work with using the links in the [Repository Guide](#repository-guide).
+2. Follow the installation and environment configuration instructions in that repository's README.
+3. Configure service URLs and credentials through local environment files. Do not commit `.env` files, API keys, access tokens, or private credentials.
+4. Start the required services. The frontend requires the Laravel API; AI chat additionally requires the FastAPI service and its configured dependencies. Automation workflows require a running n8n instance and their external integrations.
 
+## Known Limitations and Verification Notes
 
----
+The following items were identified during reviews of the supplied repository snapshots. They are source-level findings, not necessarily current production incidents; verify them against the latest code before making changes or publishing claims about runtime behavior.
 
-# 🚧 Future Improvements
+- The frontend admin order list offers `shipped`, while the backend order state validation currently documents `pending`, `processing`, `completed`, and `cancelled`.
+- The backend payment `cancel` / `deny` path marks payment as failed but does not currently follow the same order cancellation and stock-restoration path as an expired payment.
+- The AI `increase_quantity` and `decrease_quantity` wrappers were found without `await` on their MCP calls in the supplied snapshot; their schemas also need to be aligned with the selected-product state flow.
+- The AI API snapshot logs full tool results in one chat path; cart-related output should be redacted from logs.
+- Guest LangGraph checkpoints are not covered by the existing authenticated-thread activity cleanup mechanism in the supplied AI snapshot.
+- The frontend `next/image` allowlist in the supplied snapshot only includes the local Laravel storage host; production image host configuration needs confirmation.
+- The n8n repository snapshot does not contain exported workflow JSON files. The existence and active state of the workflows should be confirmed in the n8n instance.
+- Full frontend build, backend domain/integration tests, and AI end-to-end tests were not established by the supplied source audits.
 
-Possible improvements for future development include:
+## Security Notes
 
-- Wishlist functionality.
-- Expanded automated testing coverage.
-- More comprehensive API and AI agent evaluation.
-- Improved AI observability and tracing.
-- Structured LLM cost tracking.
-- Long-term user preference memory.
-- Improved product catalog synchronization for RAG.
-- More comprehensive security and red-team testing.
-- Further improvements to responsive and mobile UX.
-- Expanded deployment automation.
-- Remote MCP Server deployment.
+- Do not publish administrator passwords, API keys, bearer tokens, webhook secrets, or production environment values in this repository.
+- Use dedicated demo accounts with limited permissions if public demo access is provided.
+- Laravel must remain responsible for authorization and validation of protected business operations.
+- Treat retrieved documents and model/tool output as untrusted data.
+- Avoid logging credentials, full cart contents, or other unnecessary personal data.
 
----
+## Future Improvements
 
-# 👨‍💻 Author
+Potential areas for continued development include:
 
-**Defan Zain Pratama**
+- Expand automated tests across frontend, backend, and AI service boundaries.
+- Reconcile order and payment lifecycle behavior across services.
+- Improve AI tool reliability, logging redaction, and guest checkpoint retention.
+- Version and maintain n8n workflow exports alongside deployment configuration.
+- Improve AI observability and evaluation.
+- Continue refining responsive customer and administrator experiences.
 
-Full-Stack Developer interested in building web applications, backend systems, and AI-powered applications.
+## Author
 
-GitHub: [@DefanZp](https://github.com/DefanZp)
+**Defan Zain Pratama**  
+Full-Stack Developer interested in backend systems and AI-powered applications.
 
----
+- GitHub: [@DefanZp](https://github.com/DefanZp)
